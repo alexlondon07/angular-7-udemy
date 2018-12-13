@@ -15,7 +15,21 @@ Padre ****************************
     Resultado: {{ nombreDelParque }}
 </p>
 
+<div *ngIf="miParque">
+    <h4>Datos de mi parque desde el Hijo</h4>
+    <ol>
+        <li>{{ miParque.nombre }}</li>
+        <li>{{ miParque.metros }}</li>
+        <li>{{ miParque.vegetacion }}</li>
+        <li>{{ miParque.abierto }}</li>
+    </ol>
+</div>
+
 <p *ngIf="nombreDelParque">
     Hijo ****************************
-    <parques [nombre]="nombreDelParque" [metros_cuadrados] = "5800" ></parques>
+    <parques 
+    [nombre]="nombreDelParque" 
+    [metros_cuadrados] = "5800" 
+    (pasameLosDatos) = "verDatosParque($event)"
+    ></parques>
 </p>

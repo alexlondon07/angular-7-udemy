@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'parques',
@@ -11,10 +11,21 @@ export class ParquesComponent {
     public vegetacion: string;
     public abierto: boolean;
 
+    @Output() pasameLosDatos = new EventEmitter();
+
     constructor(){
         this.nombre = 'Parque Natural';
         this.metros = 340;
         this.vegetacion = 'Alta';
-        this.abierto = true;
+        this.abierto = false;
+    }
+
+    emitirEvento(){
+        this.pasameLosDatos.emit({ 
+            'nombre': this.nombre,
+            'metros': this.metros,
+            'vegetacion':this.vegetacion,
+            'abierto': this.abierto
+        })
     }
 }
