@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 
 export class ParquesComponent {
     @Input() nombre:string;
-    public metros: number;
+    @Input('metros_cuadrados') metros: number;
     public vegetacion: string;
     public abierto: boolean;
 
