@@ -1,0 +1,21 @@
+Padre ****************************
+<h1>{{ titulo }}</h1>
+<ul>
+    <li>Camiseta</li>
+    <li>Gorras</li>
+</ul>
+
+<hr/>
+
+<p>
+    Nombre del Parque:
+    <input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()" />    
+</p>
+<p>
+    Resultado: {{ nombreDelParque }}
+</p>
+
+<p *ngIf="nombreDelParque">
+    Hijo ****************************
+    <parques [nombre]="nombreDelParque"></parques>
+</p>
