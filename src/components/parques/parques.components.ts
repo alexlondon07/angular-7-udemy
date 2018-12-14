@@ -4,7 +4,9 @@ import { Component,
     EventEmitter,
     OnChanges,
     SimpleChanges,
-    OnInit
+    OnInit,
+    DoCheck,
+    OnDestroy
 } from '@angular/core';
 
 @Component({
@@ -12,7 +14,7 @@ import { Component,
     templateUrl: './../parques/parques.component.html',
 })
 
-export class ParquesComponent implements OnChanges, OnInit{
+export class ParquesComponent implements OnChanges, OnInit, DoCheck, OnDestroy{
     @Input() nombre:string;
     @Input('metros_cuadrados') metros: number;
     public vegetacion: string;
@@ -30,6 +32,15 @@ export class ParquesComponent implements OnChanges, OnInit{
     //Este metodo se carga cuando se ejecuta la directiva de parques
     ngOnInit(){
         console.log('ngOnInit Lanzado')
+    }
+
+    //Se ejecuta solo cuando cambios los valores de los componentes
+    ngDoCheck(){
+        console.log('ngDoCheck Se ha ejecutado')
+    }
+
+    ngOnDestroy(){
+        console.log('se va eliminar el componente');
     }
 
     //El primero que se ejecuta
