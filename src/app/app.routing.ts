@@ -3,13 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 
 //Components
 import { TiendaComponent } from './../components/tienda/tienda.components';   
+import { AnimalsComponent } from './../components/animals/animals.component';
+import { ContactComponent } from './../components/contact/contact.component';
+import { KeepersComponent } from './../components/keepers/keepers.component';
+import { HomeComponent } from './../components/home/home.component';
+
 
 
 const appRoutes: Routes = [
-    {   path : '', component: TiendaComponent },
-    {   path : '', redirectTo: 'tienda', pathMatch: 'full' },
+    
+    {   path : '', component: HomeComponent },
+    {   path : '', redirectTo: 'home', pathMatch: 'full' },
+    {   path : 'home', component: HomeComponent },
     {   path : 'tienda', component: TiendaComponent },
-    {   path : '**', component: TiendaComponent },
+    {   path : 'keepers', component: KeepersComponent },
+    {   path : 'contact', component: ContactComponent },
+    {   path : 'animals', component: AnimalsComponent },
+    {   path : '**', component: HomeComponent },
 ];
 
 export const appRoutingProviders: any[] =[];

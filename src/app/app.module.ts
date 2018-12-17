@@ -8,12 +8,20 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { TiendaComponent } from './../components/tienda/tienda.components';
 import { ParquesComponent } from './../components/parques/parques.components';
+import { AnimalsComponent } from './../components/animals/animals.component';
+import { ContactComponent } from './../components/contact/contact.component';
+import { KeepersComponent } from './../components/keepers/keepers.component';
+import { HomeComponent } from './../components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TiendaComponent,
-    ParquesComponent
+    ParquesComponent,
+    AnimalsComponent,
+    ContactComponent,
+    KeepersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
