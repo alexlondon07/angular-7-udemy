@@ -15,5 +15,4 @@ export class ContactComponent implements OnInit {
   saveEmail(){
     localStorage.setItem('emailContact', this.emailContact);
   }
-
 }

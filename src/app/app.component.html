@@ -11,7 +11,12 @@
 <a [routerLink]="['/keepers']"> Keepers </a>
 <a [routerLink]="['/contact']"> Conact </a>
 
-<span *ngIf="emailContact"> <strong>Email de Contacto: </strong>   {{ emailContact }}</span>
+<span *ngIf="emailContact"> 
+  <strong>Email de Contacto: </strong>   
+  {{ emailContact }}
+  <button (click)="deleteEmail()"> Delete Email </button>
+</span>
+
 <hr>
 <!-- <tienda></tienda> -->
 
