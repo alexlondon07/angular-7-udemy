@@ -1,3 +1,17 @@
-<p>
-  home works!
-</p>
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="jumbotron">
+    <h1>{{ title }}</h1>
+    <p>Disfrura de los animales más exoticos de nuestros zoologico :)</p>
+    <p>
+      <a class="btn btn-primary btn-lg"  role ="button" [routerLink]="[ '/animals']">
+        Ver Animales
+      </a>
+      <a class="btn btn-success btn-lg"  role ="button" [routerLink]="[ '/keepers']">
+        Ver Cuidadores
+      </a>
+      <a class="btn btn-warning btn-lg"  role ="button" [routerLink]="[ '/contact']">
+        Contacta con nostros
+      </a>
+    </p>
+  </div>
+</div>
