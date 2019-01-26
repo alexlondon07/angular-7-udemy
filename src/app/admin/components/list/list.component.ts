@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
   title = 'Admin List'; 
+  items = new Array(15)
   constructor() { }
 
   ngOnInit() {
