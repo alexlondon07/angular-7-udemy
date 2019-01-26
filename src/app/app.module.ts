@@ -13,6 +13,9 @@ import { ContactComponent } from './../components/contact/contact.component';
 import { KeepersComponent } from './../components/keepers/keepers.component';
 import { HomeComponent } from './../components/home/home.component';
 
+//Modules
+import { AdminModule } from './admin/admin.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +30,8 @@ import { HomeComponent } from './../components/home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    routing
+    routing,
+    AdminModule
   ],
   providers: [
     appRoutingProviders
