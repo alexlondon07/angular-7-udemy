@@ -1,0 +1,28 @@
+{
+  "name": "angularcourse4-backend-nodejs",
+  "version": "1.0.0",
+  "description": "Api Rest ful the angular 4 project ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Alexander Londoño Espejo",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.16.4",
+    "jwt-simple": "^0.5.5",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
