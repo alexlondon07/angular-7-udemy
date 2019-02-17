@@ -13,6 +13,10 @@ function test(req, res){
     });
 }
 
+//Texts
+var msjErrorEmail = "Error validating User’s email";
+var msjUserAlreadyExists = "The user already exists";
+
 function saveUser(req, res){
 
     //Create Object User
@@ -32,10 +36,10 @@ function saveUser(req, res){
         //Validate Email if exists
         User.findOne({ email: user.email.toLowerCase()}, (err, issetUser) =>{
             if(err){
-                res.status(500).send({message: "Error validating User’s email"});
+                res.status(500).send({message: msjErrorEmail });
             }else{
                 if(!issetUser){
-                    bcrypt.hash(params.params, null, null, function (err, hash ) {
+                    bcrypt.hash(params.password, null, null, function (err, hash ) {
                         user.password = hash;
             
                         //Save User in DataBase
@@ -52,7 +56,7 @@ function saveUser(req, res){
                         })
                     });
                 }else{
-                    res.status(200).send({ message: 'The user already exists' });
+                    res.status(200).send({ message: msjUserAlreadyExists });
                 }
             }
         });
@@ -61,6 +65,44 @@ function saveUser(req, res){
     }
 }
 
+/**
+ * Method User Login
+ * @param {*} req 
+ * @param {*} res 
+ */
+function login(req, res){
+    var params = req.body;
+    var email =  params.email;
+    var password = params.password;
+
+    User.findOne({ email: email.toLowerCase() }, (err, user) => {
+        if(err){
+            res.status(500).send({ message: msjErrorEmail });
+        }else{
+            if(user){
+                console.log('user', user.password);
+                bcrypt.compare(password, user.password, function(err, check)  {
+                    if(check){
+                        // Passwords match
+                        res.status(200).send({ user });
+                    }else{
+                        // Passwords don't match
+                        res.status(404).send({
+                            message: 'Password is incorrect'
+                        });
+                    }
+                });
+            }else{
+                res.status(404).send({
+                    message: 'User was unable to enter the system'
+                });
+            }
+        }
+    });
+}
+
 module.exports = {
-    test, saveUser
+    test, 
+    saveUser,
+    login
 }
