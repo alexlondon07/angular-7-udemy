@@ -6,6 +6,9 @@ var bcrypt = require('bcrypt-nodejs');
 //Models
 var User = require('../models/user');
 
+//Services jwt
+var jwt = require('../services/jwt');
+
 //Actions
 function test(req, res){
     res.status(200).send({
@@ -80,11 +83,17 @@ function login(req, res){
             res.status(500).send({ message: msjErrorEmail });
         }else{
             if(user){
-                console.log('user', user.password);
                 bcrypt.compare(password, user.password, function(err, check)  {
                     if(check){
-                        // Passwords match
-                        res.status(200).send({ user });
+                        //Validate and Generate Token
+                        if(params.gettoken){    
+                            res.status(200).send({ 
+                                token: jwt.createToken(user)
+                            });
+                        }else{
+                            // Passwords match
+                            res.status(200).send({ user });
+                        }
                     }else{
                         // Passwords don't match
                         res.status(404).send({
