@@ -12,7 +12,8 @@ var jwt = require('../services/jwt');
 //Actions
 function test(req, res){
     res.status(200).send({
-        message: 'Test the contoller and test action'
+        message: 'Test the contoller and test action',
+        user: req.user
     });
 }
 
