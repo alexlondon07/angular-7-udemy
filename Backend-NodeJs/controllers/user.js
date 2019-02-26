@@ -21,6 +21,11 @@ function test(req, res){
 var msjErrorEmail = "Error validating User’s email";
 var msjUserAlreadyExists = "The user already exists";
 
+/**
+ * Method User Save
+ * @param {*} req 
+ * @param {*} res 
+ */
 function saveUser(req, res){
 
     //Create Object User
@@ -111,8 +116,39 @@ function login(req, res){
     });
 }
 
+/**
+ * Method User Update
+ * @param {*} req 
+ * @param {*} res 
+ */
+function updateUser(req, res){
+    var userId = req.params.id;
+    var update = req.body;
+
+    if( userId != req.user.sub ){
+        return res.status(200).send({
+            message: "Don´t have permissions to update the user"
+        });
+    }
+
+    User.findByIdAndUpdate(userId, update, {new: true}, (err, userUpdated) => {
+        if(err){
+            res.status(500).send({
+                message: "Error to update User"
+            });
+        }else{
+            if( !userUpdated) {
+                res.status(404).send({message: "The user no has been update in database"});
+            }else{
+                res.status(201).send({ user: userUpdated });
+            }
+        }
+    });
+}
+
 module.exports = {
     test, 
     saveUser,
-    login
+    login, 
+    updateUser
 }
