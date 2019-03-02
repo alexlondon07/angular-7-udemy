@@ -2,6 +2,7 @@
 
 //Modules
 var bcrypt = require('bcrypt-nodejs');
+var fs = require('fs');
 
 //Models
 var User = require('../models/user');
@@ -146,9 +147,61 @@ function updateUser(req, res){
     });
 }
 
+/**
+ * Method Upload Imagen
+ * @param {*} req 
+ * @param {*} res 
+ */
+function uploadImage(req, res){
+    var userId = req.params.id;
+    var file_name = 'No upload...';
+    if( req.files ){
+
+        // File Path
+        var file_path = req.files.image.path;
+        var file_split = file_path.split("/");
+        var file_name = file_split[2];
+
+        //Extension 
+        var ext = file_name.split('\.');
+        var file_ext = ext[1].toLowerCase();
+
+        if( file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
+
+            if( userId != req.user.sub ){
+                res.status(500).send({message: "Don´t have permission to update user"});
+            }
+
+            User.findByIdAndUpdate(userId, { image: file_name }, { new: true }, (err, userUpdated) => {
+                if(err){
+                    res.status(500).send({
+                        message: "Error to update User"
+                    });
+                }else{
+                    if( !userUpdated) {
+                        res.status(404).send({message: "The user no has been update in database"});
+                    }else{
+                        res.status(201).send({ user: userUpdated, image: file_name });
+                    }
+                }
+            });
+        }else{
+            fs.unlink( file_path, (err) => {
+                if(err){
+                    return res.status(200).send({ message: "Extension of the image is valid and the file wasn´t deleted" });
+                }else{
+                    return res.status(200).send({ message: "Extension of the image is valid" });
+                }
+            });
+        }
+    }else{
+        return res.status(200).send({ message: "Image is required" });
+    } 
+}
 module.exports = {
     test, 
     saveUser,
     login, 
-    updateUser
+    updateUser,
+    uploadImage
 }
