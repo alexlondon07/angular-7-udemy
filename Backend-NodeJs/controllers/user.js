@@ -240,6 +240,25 @@ function getImageFile(req, res){
     });
 }
 
+/**
+ * Method getKeepers
+ * @param {*} req 
+ * @param {*} res 
+ */
+function getKeepers(req, res) {
+    User.find({ role: 'ROLE_ADMIN' }).exec( (err, users)=> {
+        if(err){
+            return res.status(500).send({ message: "Error in the request" }); 
+        }else{
+            if(!users){
+                return res.status(404).send({ message: "Keepers not found" }); 
+            }else{
+                return res.status(200).send({ users }); 
+            }
+        }
+    });
+}
+
 
 module.exports = {
     test, 
@@ -248,5 +267,6 @@ module.exports = {
     updateUser,
     uploadImage,
     getImageFile,
+    getKeepers,
     USER_CONSTANTS
 }
