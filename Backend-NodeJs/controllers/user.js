@@ -3,12 +3,18 @@
 //Modules
 var bcrypt = require('bcrypt-nodejs');
 var fs = require('fs');
+var path = require('path');
 
 //Models
 var User = require('../models/user');
 
 //Services jwt
 var jwt = require('../services/jwt');
+
+//Constants
+var USER_CONSTANTS = {
+    upload_user: './uploads/users/'
+}
 
 //Actions
 function test(req, res){
@@ -177,8 +183,8 @@ function uploadImage(req, res){
                 if(err){
                     res.status(500).send({ message: "Error to deleting the file" });
                 }else{
-                    if( user && user.image != "" ){
-                        var file_path_to_remove = './uploads/users/'+user.image;
+                    if( user && user.image != "" ||  user.image != null ){
+                        var file_path_to_remove = USER_CONSTANTS.upload_user + user.image;
                         fs.unlink( file_path_to_remove, (err) => {
                             if(err){
                                 return res.status(200).send({ message: "Error to deleting the previous file" });
@@ -216,10 +222,31 @@ function uploadImage(req, res){
         return res.status(200).send({ message: "Image is required" });
     } 
 }
+
+/**
+ * Method getImageFile
+ * @param {*} req 
+ * @param {*} res 
+ */
+function getImageFile(req, res){
+    var imageFile = req.params.imageFile;
+    var file_path = USER_CONSTANTS.upload_user + imageFile; 
+    fs.exists( file_path, function (exists) {
+        if(exists){
+            res.sendFile(path.resolve(file_path));
+        }else{
+            return res.status(404).send({ message: "The file not exists" }); 
+        }
+    });
+}
+
+
 module.exports = {
     test, 
     saveUser,
     login, 
     updateUser,
-    uploadImage
+    uploadImage,
+    getImageFile,
+    USER_CONSTANTS
 }
