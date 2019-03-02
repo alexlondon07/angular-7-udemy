@@ -6,9 +6,10 @@ var UserController = require('../controllers/user');
 var api = express.Router();
 var middleware_auth = require('../middlewares/autenticate');
 
+var userUploadDir = './uploads/users';
 
 var multipart = require('connect-multiparty');
-var middleware_upload = multipart( { uploadDir: './uploads/users'});
+var middleware_upload = multipart( { uploadDir: userUploadDir });
 
 api.post('/login', UserController.login);
 api.post('/register-user', UserController.saveUser);

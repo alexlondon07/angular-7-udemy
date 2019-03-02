@@ -172,6 +172,23 @@ function uploadImage(req, res){
                 res.status(500).send({message: "Don´t have permission to update user"});
             }
 
+            //Valid if the user have a image
+            User.findOne({ _id: userId }, (err, user) => {
+                if(err){
+                    res.status(500).send({ message: "Error to deleting the file" });
+                }else{
+                    if( user && user.image != "" ){
+                        var file_path_to_remove = './uploads/users/'+user.image;
+                        fs.unlink( file_path_to_remove, (err) => {
+                            if(err){
+                                return res.status(200).send({ message: "Error to deleting the previous file" });
+                            }
+                        });
+                    }
+                }
+            });
+
+            //Update the image 
             User.findByIdAndUpdate(userId, { image: file_name }, { new: true }, (err, userUpdated) => {
                 if(err){
                     res.status(500).send({
@@ -186,6 +203,7 @@ function uploadImage(req, res){
                 }
             });
         }else{
+            //Delete the file if the extension isn’t valid
             fs.unlink( file_path, (err) => {
                 if(err){
                     return res.status(200).send({ message: "Extension of the image is valid and the file wasn´t deleted" });
