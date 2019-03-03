@@ -12,5 +12,6 @@ var middleware_upload = multipart( { uploadDir: AnimalController.ANIMAL_CONSTANT
 api.get('/test-controller-animal', middleware_auth.ensureAuth, AnimalController.testAnimal);
 api.post('/animal', middleware_auth.ensureAuth, AnimalController.saveAnimal);
 api.get('/animals', AnimalController.getAnimals);
+api.get('/animal/:id', AnimalController.getAnimalById);
 
 module.exports = api;

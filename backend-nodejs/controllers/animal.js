@@ -73,9 +73,32 @@ function getAnimals(req, res){
     });
 }
 
+/**
+ * Method getAnimalById
+ * @param {*} req 
+ * @param {*} res 
+ */
+function getAnimalById(req, res){
+    var animalId =  req.params.id;
+    Animal.findById(animalId).populate({path: 'user'}).exec((err, animal) =>{
+        if(err){
+            res.status(500).send({
+                message: 'Error in the request'
+            });
+        }else{
+            if(!animal){
+                res.status(404).send({ message: 'Animal no found' });
+            }else{
+                res.status(200).send({ animal });
+            }
+        }
+    });
+}
+
 module.exports = {
     testAnimal,
     saveAnimal,
     getAnimals,
+    getAnimalById,
     ANIMAL_CONSTANTS
 }
