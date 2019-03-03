@@ -5,7 +5,6 @@ var fs = require('fs');
 var path = require('path');
 
 //Models
-var User = require('../models/user');
 var Animal = require('../models/animal');
 
 //Constants
@@ -21,7 +20,40 @@ function testAnimal(req, res){
     });
 }
 
+/**
+ * Method Animal Save
+ * @param {*} req 
+ * @param {*} res 
+ */
+function saveAnimal(req, res){
+    var animal = new Animal(); 
+    var params = req.body;
+    if( params.name != "" ){
+        animal.name = params.name;
+        animal.description = params.description,
+        animal.year = params.year,
+        animal.image = null,
+        animal.user = req.user.sub;
+        animal.save(( err, animalStored)=>{
+            if(err){
+                res.status(500).send({ message: 'Error in the server' });
+            }else{
+                if(!animalStored){
+                    res.status(404).send({ message: 'Error, The animal has not been saved' });
+                }else{
+                    res.status(200).send({ animal: animalStored });
+                }
+            }
+        });
+    }else{
+        res.status(200).send({
+            message: 'The name field is required'
+        });
+    }
+}
+
 module.exports = {
     testAnimal,
+    saveAnimal,
     ANIMAL_CONSTANTS
 }
