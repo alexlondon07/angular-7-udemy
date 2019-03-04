@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var AnimalSchema = Schema({
     user: { type: Schema.ObjectId, ref: 'User' },
-    animal: String,
+    name: String,
     description: String,
     year: String,
     image: String,

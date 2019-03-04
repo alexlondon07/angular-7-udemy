@@ -95,10 +95,34 @@ function getAnimalById(req, res){
     });
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+function updateAnimal(req, res){
+    var animalId = req.params.id;
+    var update = req.body;
+    Animal.findByIdAndUpdate(animalId, update, {new: true}, (err, animalUpdated) => {
+        if(err){
+            res.status(500).send({
+                message: "Error to update Animal"
+            });
+        }else{
+            if( !animalUpdated) {
+                res.status(404).send({message: "The animal no has been update in database"});
+            }else{
+                res.status(201).send({ user: animalUpdated });
+            }
+        }
+    });
+}
+
 module.exports = {
     testAnimal,
     saveAnimal,
     getAnimals,
     getAnimalById,
+    updateAnimal,
     ANIMAL_CONSTANTS
 }
