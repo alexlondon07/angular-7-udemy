@@ -14,6 +14,7 @@ api.get('/animals', AnimalController.getAnimals);
 api.get('/animal/:id', AnimalController.getAnimalById);
 api.post('/animal', middleware_auth.ensureAuth, AnimalController.saveAnimal);
 api.put('/animal/:id', middleware_auth.ensureAuth, AnimalController.updateAnimal);
+api.delete('/animal/:id', middleware_auth.ensureAuth, AnimalController.deleteAnimal);
 api.post('/upload-image-animal/:id', [middleware_auth.ensureAuth, middleware_upload], AnimalController.uploadImage);
 api.get('/get-image-animal/:imageFile', AnimalController.getImageFile);
 

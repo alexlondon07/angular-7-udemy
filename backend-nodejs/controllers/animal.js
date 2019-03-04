@@ -209,6 +209,37 @@ function getImageFile(req, res){
         }
     });
 }
+
+/**
+ * Method Animal Delete
+ * @param {*} req 
+ * @param {*} res 
+ */
+function deleteAnimal(req, res){
+    var animalId = req.params.id;
+    var update = req.body;
+    Animal.findByIdAndDelete(animalId, update, (err, animalRemoved) => {
+        if(err){
+            res.status(500).send({ message: "Error in the request"});
+        }else{
+            if( !animalRemoved ) {
+                res.status(404).send({message: "The animal no has been delete in database"});
+            }else{
+
+                if( animalRemoved && animalRemoved.image !="" || animalRemoved.image !="null"){
+                    var file_path_to_remove = ANIMAL_CONSTANTS.upload_animal + animalRemoved.image;
+                    fs.unlink( file_path_to_remove, (err) => {
+                        if(err){
+                            return res.status(200).send({ message: "Error to deleting the previous file" });
+                        }
+                    });
+                }
+                res.status(201).send({ user: animalRemoved });
+            }
+        }
+    });
+}
+
 module.exports = {
     testAnimal,
     saveAnimal,
@@ -217,5 +248,6 @@ module.exports = {
     updateAnimal,
     getImageFile,
     uploadImage,
+    deleteAnimal,
     ANIMAL_CONSTANTS
 }
