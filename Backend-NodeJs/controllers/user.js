@@ -161,7 +161,7 @@ function updateUser(req, res){
 function uploadImage(req, res){
     var userId = req.params.id;
     var file_name = 'No upload...';
-    if( req.files ){
+    if( req.params.files ){
 
         // File Path
         var file_path = req.files.image.path;
@@ -183,7 +183,7 @@ function uploadImage(req, res){
                 if(err){
                     res.status(500).send({ message: "Error to deleting the file" });
                 }else{
-                    if( user && user.image != "" ||  user.image != null ){
+                    if( user && user.image != ""){
                         var file_path_to_remove = USER_CONSTANTS.upload_user + user.image;
                         fs.unlink( file_path_to_remove, (err) => {
                             if(err){
@@ -198,7 +198,7 @@ function uploadImage(req, res){
             User.findByIdAndUpdate(userId, { image: file_name }, { new: true }, (err, userUpdated) => {
                 if(err){
                     res.status(500).send({
-                        message: "Error to update User"
+                        message: "Error to update image"
                     });
                 }else{
                     if( !userUpdated) {
