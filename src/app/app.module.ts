@@ -10,8 +10,10 @@ import { TiendaComponent } from './../components/tienda/tienda.components';
 import { ParquesComponent } from './../components/parques/parques.components';
 import { AnimalsComponent } from './../components/animals/animals.component';
 import { ContactComponent } from './../components/contact/contact.component';
-import { KeepersComponent } from './../components/keepers/keepers.component';
 import { HomeComponent } from './../components/home/home.component';
+import { KeepersComponent } from './../components/keepers/keepers.component';
+import { RegisterComponent } from './../components/register/register.component';
+import { LoginComponent } from './../components/login/login.component';
 
 //Modules
 import { AdminModule } from './admin/admin.module';
@@ -24,7 +26,9 @@ import { AdminModule } from './admin/admin.module';
     AnimalsComponent,
     ContactComponent,
     KeepersComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
