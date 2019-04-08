@@ -1,5 +1,7 @@
 <body>
     <div class="container">
+
+      <div class="alert"></div>
       <div class="signup-form-container">
             <!-- form start -->
             <form #registerForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off" class="col-lg-4">
@@ -12,7 +14,7 @@
                   <div class="form-group">
                         <div class="input-group">
                           <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                          <input name="name" #name="ngModel" [(ngModel)]="user.name" type="text" class="form-control" placeholder="Username" required>
+                          <input name="name" #name="ngModel" [(ngModel)]="user.name" type="text" class="form-control" placeholder="Name" required>
                         </div>
                         <span *ngIf="!name.valid && name.touched" class="label label-danger">
                             Name field is required
