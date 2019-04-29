@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service.service';
 export class RegisterComponent implements OnInit {
   public title: string;
   public user: User;
+  public message: string;
   public status: string;
 
   constructor(
@@ -27,18 +28,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-
     this._userservice.register(this.user).subscribe((response)=>{
+      this.status = 'success';
       try {
-        console.log("response", response);
         if(response.user._id){
-          this.user = response.user;
-          this.status = 'The register was success';
+          this.message = 'The register was success';
         }else{
-          this.status = 'Error in the user register'
+          this.message = 'Error in the user register'
+          this.status = 'error';
         }
       } catch (error) {
+        this.status = 'error';
         console.log('Error to register user:  '+error);
+        this.message = 'Error to register user:  '+error;
       }
     });
   }

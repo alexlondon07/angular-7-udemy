@@ -3,6 +3,10 @@
 
       <div class="alert"></div>
       <div class="signup-form-container">
+
+        <div class="alert alert-success" *ngIf="message">
+          {{ message }}
+        </div>
             <!-- form start -->
             <form #registerForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off" class="col-lg-4">
             
