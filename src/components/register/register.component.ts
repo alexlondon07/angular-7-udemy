@@ -27,12 +27,17 @@ export class RegisterComponent implements OnInit {
     console.log('Register Component Loaded !!');
   }
 
+  cleanUser(){
+    this.user = new User('','','','','','ROLE_USER', '');
+  }
+
   onSubmit(){
     this._userservice.register(this.user).subscribe((response)=>{
       this.status = 'success';
       try {
-        if(response.user._id){
+        if( response["user"]._id ){
           this.message = 'The register was success';
+          this.user = new User('','','','','','ROLE_USER', '');
         }else{
           this.message = 'Error in the user register'
           this.status = 'error';

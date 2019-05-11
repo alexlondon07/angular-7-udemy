@@ -9,9 +9,12 @@ import { User } from '../models/user';
 @Injectable()
 export class UserService {
   public url: string;
+  public login: string;
+  
   
   constructor(private _http: HttpClient){
     this.url = GLOBAL.url;
+    this.login = GLOBAL.login;
   }
 
   /**
@@ -32,10 +35,8 @@ export class UserService {
     }
     let params = JSON.stringify(user_to_login);
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    //console.log('parameter', params);
-    //console.log('headers', headers);
-    return this._http.post(this.url+'login', params, { headers: headers } ).
+    
+    return this._http.post(this.url + this.login, params, { headers: headers } ).
     map(res => res);
   }
 }

@@ -31,12 +31,11 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit(){
-    console.log(this.user);
+    //console.log(this.user);
     try {
         //User Login and get  User Object
-        this._userservice.signup(this.user).subscribe(
-          response => {
-            this.identity = response.user;
+        this._userservice.signup(this.user).subscribe(response => {
+            this.identity = response["user"];
 
             if( !this.identity || !this.identity._id){
               alert('The user has not been logged in');
@@ -49,7 +48,7 @@ export class LoginComponent implements OnInit {
                 //Get Token
                 this._userservice.signup(this.user, 'true').subscribe(
                   response => {
-                    this.token = response.token;
+                    this.token = response["token"];
                     if( this.token.length <=0 ){
                       alert('Error generating the token');
                     }else{
