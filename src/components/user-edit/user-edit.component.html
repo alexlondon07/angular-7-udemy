@@ -1,5 +1,58 @@
 <div class="col-lg-6">
-  <h1>
-    {{ title }}
-  </h1>
+  <h1>{{ title }}</h1>
+
+  <div class="alert alert-success" *ngIf="status == 'success' ">
+      You Has been your data success
+  </div>
+
+  <div class="alert alert-success" *ngIf="status == 'error' ">
+      {{ message }}
+  </div>
+
+
+ <!-- form start -->
+ <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off" class="col-lg-4">
+    
+    <div class="form-header">
+      <h3 class="form-title"><i class="fa fa-user"></i> User Register</h3>
+    </div>
+    
+    <div class="form-body">
+        <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                <input name="name" #name="ngModel" [(ngModel)]="user.name" type="text" class="form-control" placeholder="Name" required>
+              </div>
+              <span *ngIf="!name.valid && name.touched" class="label label-danger">
+                  Name field is required
+              </span>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+              <input name="surname" #surname="ngModel" [(ngModel)]="user.surname" type="text" class="form-control" placeholder="Last Name" required>
+            </div>
+            <span *ngIf="!surname.valid && surname.touched" class="label label-danger">
+                Surname field is required
+            </span>
+        </div>
+
+        <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                <input name="email" #email="ngModel" [(ngModel)]="user.email" type="text" class="form-control" placeholder="Email" required>
+              </div> 
+              <span *ngIf="!email.valid && email.touched" class="label label-danger">
+                  Email field is required
+              </span>
+        </div>
+      </div>
+
+      <div class="form-footer">
+            <button type="submit" class="btn btn-info" [disabled]="!userEditForm.form.valid">
+              <span class="glyphicon glyphicon-log-in"></span> Update !
+            </button>
+      </div>
+  </form>
 </div>
