@@ -10,7 +10,8 @@ import { User } from '../models/user';
 export class UserService {
   public url: string;
   public login: string;
-  
+  public identity;
+  public token;
   
   constructor(private _http: HttpClient){
     this.url = GLOBAL.url;
@@ -22,23 +23,46 @@ export class UserService {
    * @param user_to_register 
    */
   register(user_to_register){
-    let params = JSON.stringify(user_to_register);
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      let params = JSON.stringify(user_to_register);
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    return this._http.post(this.url+'register-user', params, { headers: headers } ).
-    map(res => res);
+      return this._http.post(this.url+'register-user', params, { headers: headers } ).
+      map(res => res);
   }
 
+  /**
+   * Metodo para realizar el login
+   */
   signup(user_to_login, gettoken = null){
-    if ( gettoken !=null ){
-      user_to_login.gettoken = gettoken;
-    }
-    let params = JSON.stringify(user_to_login);
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
-    return this._http.post(this.url + this.login, params, { headers: headers } ).
-    map(res => res);
+      if ( gettoken !=null ){
+        user_to_login.gettoken = gettoken;
+      }
+      let params = JSON.stringify(user_to_login);
+      let headers = new HttpHeaders({'Content-Type': 'application/json'});
+      
+      return this._http.post(this.url + this.login, params, { headers: headers } ).
+      map(res => res);
   }
+
+  getIdentity(){
+      let identity = JSON.parse( localStorage.getItem('identity') );
+      if( identity != "undefined"){
+        this.identity = identity;
+      }else{
+        this.identity = null;
+      }
+      return this.identity;
+  }
+
+  getToken(){
+    let token = localStorage.getItem('token');
+    if( token != "undefined"){
+      this.token = token;
+    }else{
+      this.token = null;
+    }
+    return this.token;
+}
 }
 
 

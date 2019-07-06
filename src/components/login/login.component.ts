@@ -22,12 +22,14 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _userservice: UserService) { 
 
-    this.title = 'Login';
+    this.title = 'Identificate';
     this.user = new User('','','','','', 'ROLE_USER', '');
   }
 
   ngOnInit() {
     console.log('Login Component Loaded !!');
+    console.log( this._userservice.getIdentity() );
+    console.log( this._userservice.getToken() );
   }
   
   onSubmit(){
@@ -40,10 +42,9 @@ export class LoginComponent implements OnInit {
             if( !this.identity || !this.identity._id){
               alert('The user has not been logged in');
             }else{
-
               this.identity.password = '';
-              //Show Identity
-              console.log('identity', this.identity);
+
+              localStorage.setItem('identity', JSON.stringify( this.identity ));
 
                 //Get Token
                 this._userservice.signup(this.user, 'true').subscribe(
@@ -52,9 +53,10 @@ export class LoginComponent implements OnInit {
                     if( this.token.length <=0 ){
                       alert('Error generating the token');
                     }else{
-                      //Show token
-                      console.log('token', this.token);
+                      localStorage.setItem('token', this.token);
                       this.status = 'success';
+
+                      this._router.navigate(['/']);
                     }
                   },
                   error => {
@@ -65,10 +67,10 @@ export class LoginComponent implements OnInit {
             }
           },
           error => {
-            var errorMjs  = <any>error;
-            if ( errorMjs !=null){
+            var errorMessage  = <any>error;
+            if ( errorMessage !=null){
               this.status = 'error';
-              console.log('Error in catch Login:  ', errorMjs.error.message);
+              console.log('Error in catch Login:  ', errorMessage.error.message);
             }
           }
         )
