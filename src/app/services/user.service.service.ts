@@ -55,14 +55,25 @@ export class UserService {
   }
 
   getToken(){
-    let token = localStorage.getItem('token');
-    if( token != "undefined"){
-      this.token = token;
-    }else{
-      this.token = null;
-    }
-    return this.token;
-}
+      let token = localStorage.getItem('token');
+      if( token != "undefined"){
+        this.token = token;
+      }else{
+        this.token = null;
+      }
+      return this.token;
+  }
+
+  updateUser(usert_to_update){
+      let params = JSON.stringify(usert_to_update);
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.getToken()
+      });
+
+      return this._http.put(this.url+'update-user/' + usert_to_update._id, params, { headers: headers } )
+        .map(res => res);
+  }
 }
 
 

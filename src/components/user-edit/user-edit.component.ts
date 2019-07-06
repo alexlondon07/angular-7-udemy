@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service.service';
@@ -14,6 +14,8 @@ export class UserEditComponent implements OnInit {
   public user: User;
   public identity;
   public token;
+  public status;
+  public message: string;
 
   constructor(private _userservice: UserService) { 
     this.title = 'Update user';
@@ -22,9 +24,27 @@ export class UserEditComponent implements OnInit {
     this.user = this.identity;
   }
 
-
   ngOnInit() {
-    console.log('UserEditComponent Loaded !!');
+    console.log('UserEditComponent Load');
+  }
+
+  onSubmit(){
+    this._userservice.updateUser(this.user).subscribe((response)=>{
+      this.status = 'success';
+      try {
+        if( !response["user"] ){
+          this.status = 'error';
+          this.message = 'Error to update user';
+        }else{
+          localStorage.setItem('identity', JSON.stringify(this.user));
+
+          //Upload User Image
+        }
+      } catch (error) {
+        this.status = 'error';
+        this.message = 'Error to update user:  '+error;
+      }
+    });
   }
 
 }
