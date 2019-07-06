@@ -15,6 +15,7 @@ import { HomeComponent } from './../components/home/home.component';
 import { KeepersComponent } from './../components/keepers/keepers.component';
 import { RegisterComponent } from './../components/register/register.component';
 import { LoginComponent } from './../components/login/login.component';
+import { UserEditComponent } from 'src/components/user-edit/user-edit.component';
 
 //Modules
 import { AdminModule } from './admin/admin.module';
@@ -29,7 +30,8 @@ import { AdminModule } from './admin/admin.module';
     KeepersComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

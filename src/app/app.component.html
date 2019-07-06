@@ -62,7 +62,7 @@
 
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">
         <li>
-            <a> <span class="glyphicon glyphicon-cog"></span> My data </a>
+            <a [routerLink]="['/my-data']" routerLinkActive="router-link-active" > <span class="glyphicon glyphicon-cog"></span> My data </a>
         </li>
         <li>
             <a class="pointer" (click)="logout()"> <span class="glyphicon glyphicon-log-out"></span> Get out </a>
