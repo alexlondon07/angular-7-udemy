@@ -65,10 +65,10 @@
             <a> <span class="glyphicon glyphicon-cog"></span> My data </a>
         </li>
         <li>
-            <a> <span class="glyphicon glyphicon-log-out"></span> Get out </a>
+            <a class="pointer" (click)="logout()"> <span class="glyphicon glyphicon-log-out"></span> Get out </a>
         </li>
         <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
               {{ identity.name }} <span class="caret"></span>
             </a>
         </li>
