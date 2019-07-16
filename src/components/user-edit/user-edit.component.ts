@@ -2,11 +2,12 @@ import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service.service';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'user-edit',
   templateUrl: './user-edit.component.html',
-  providers: [UserService]
+  providers: [UserService, UploadService]
 })
 export class UserEditComponent implements OnInit {
 
