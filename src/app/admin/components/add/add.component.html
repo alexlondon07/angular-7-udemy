@@ -1,8 +1,31 @@
-{{ title }}
+<div class="col-lg-10">
+    <h1>{{ title }}</h1>
 
-<form action="">
-    <p><label>Name</label> <input type="text" class="form-control" /></p>
-    <p><label>Description</label> <textarea type="text" class="form-control" ></textarea></p>
-    <p><label>Year</label> <input type="text" class="form-control" /></p>
-    <input type="submit" value="Save" class="btn btn-success">
-</form>
+    <div class="alert alert-success" *ngIf="message">
+            {{ message }}
+    </div>
+
+    <form #formAnimal="ngForm"  (ngSubmit)="onSubmit()" action="">
+        <p><label>Name</label> 
+            <input  name="name" #name="ngModel" [(ngModel)]="animal.name" type="text" class="form-control" required />
+            <span *ngIf="!name.valid && name.touched" class="label label-danger">
+                    Name field is required
+            </span>
+        </p>
+        <p>
+            <label>Description</label>
+            <textarea name="description" #description="ngModel" [(ngModel)]="animal.description" type="text" class="form-control" required></textarea>
+            <span *ngIf="!description.valid && description.touched" class="label label-danger">
+                    Description field is required
+            </span>
+        </p>
+        <p>
+            <label>Year</label> 
+            <input name="year" #year="ngModel" [(ngModel)]="animal.year" type="text" class="form-control" required/>
+            <span *ngIf="!year.valid && year.touched" class="label label-danger">
+                    Year field is required
+            </span>
+        </p>
+        <input type="submit" value="Save" class="btn btn-success" />
+    </form>
+</div>
