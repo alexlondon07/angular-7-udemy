@@ -12,6 +12,11 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 
+//Guards
+import { AdminGuard } from '../guards/admin-guards';
+
+//Services
+import { UserService } from '../services/user.service.service';
 
 @NgModule({
     declarations: [
@@ -34,6 +39,9 @@ import { DeleteComponent } from './components/delete/delete.component';
         EditComponent,
         DeleteComponent
     ],
-    providers: []
+    providers: [ 
+        UserService,
+        AdminGuard
+    ]
 })
 export class AdminModule { }
