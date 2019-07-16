@@ -61,11 +61,18 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-        <li>
-            <a [routerLink]="['/my-data']" routerLinkActive="router-link-active" > <span class="glyphicon glyphicon-cog"></span> My data </a>
+        <li *ngIf="identity && identity.role == 'ROLE_ADMIN' ">
+            <a [routerLink]="['/admin-panel']" routerLinkActive="router-link-active" > 
+              <span  routerLinkActive="router-link-active"  class="glyphicon glyphicon-task">
+              </span> Administration </a>
         </li>
         <li>
-            <a class="pointer" (click)="logout()"> <span class="glyphicon glyphicon-log-out"></span> Get out </a>
+            <a [routerLink]="['/my-data']" routerLinkActive="router-link-active" > 
+              <span class="glyphicon glyphicon-cog"></span> My data </a>
+        </li>
+        <li>
+            <a class="pointer" (click)="logout()"> 
+              <span class="glyphicon glyphicon-log-out"></span> Get out </a>
         </li>
         <li>
             <a class="dropdown-toggle" data-toggle="dropdown">
