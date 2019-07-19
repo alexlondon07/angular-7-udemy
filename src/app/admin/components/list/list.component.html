@@ -10,9 +10,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of items let i = index">
-                <td>Oso {{ i + 1 }}</td>
-                <td>2005</td>
+            <tr *ngFor="let animal of animals">
+                <td>{{ animal.name }}</td>
+                <td>{{ animal.year }}</td>
                 <td>
                     <button class="btn btn-sm btn-success">
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

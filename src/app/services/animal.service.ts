@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from './global';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class AnimalService {
@@ -22,4 +23,10 @@ export class AnimalService {
         return this._http.post(this.url+'animal', params, { headers: headers})
         .map(res => res);
     }
+
+    getAnimals(){
+        return this._http.get(this.url+'animals').map(res => res);
+    }
+
+
 }
