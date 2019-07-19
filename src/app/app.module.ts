@@ -19,6 +19,7 @@ import { UserEditComponent } from 'src/components/user-edit/user-edit.component'
 
 //Modules
 import { AdminModule } from './admin/admin.module';
+import { AnimalDetail } from 'src/components/animal-detail/animal-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AdminModule } from './admin/admin.module';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    UserEditComponent
+    UserEditComponent,
+    AnimalDetail
   ],
   imports: [
     BrowserModule,

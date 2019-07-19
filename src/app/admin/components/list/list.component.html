@@ -14,10 +14,10 @@
                 <td>{{ animal.name }}</td>
                 <td>{{ animal.year }}</td>
                 <td>
-                    <button class="btn btn-sm btn-success">
+                    <a  [routerLink]="[ '/animal', animal._id ]" routerLinkActive="router-link-active"  class="btn btn-sm btn-success">
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         View
-                    </button>
+                    </a>
                     <button class="btn btn-sm btn-danger">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         Edit
