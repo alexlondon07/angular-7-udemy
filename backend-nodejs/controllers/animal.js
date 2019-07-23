@@ -113,7 +113,7 @@ function updateAnimal(req, res){
             if( !animalUpdated) {
                 res.status(404).send({message: "The animal no has been update in database"});
             }else{
-                res.status(201).send({ user: animalUpdated });
+                res.status(201).send({ animal: animalUpdated });
             }
         }
     });

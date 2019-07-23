@@ -17,7 +17,7 @@ const appRoutes: Routes = [
         children: [
             { path : 'list', component: ListComponent },
             { path : 'add', component: AddComponent },
-            { path : 'edit', component: EditComponent },
+            { path : 'edit/:id', component: EditComponent },
             { path : 'delete', component: DeleteComponent }
         ] 
     }

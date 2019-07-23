@@ -32,5 +32,14 @@ export class AnimalService {
         return this._http.get(this.url+'animal/'+id).map(res => res);
     }
 
+    editAnimal(token, id, animal){
+        let params = JSON.stringify(animal);
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': token
+        });
+        return this._http.put(this.url+'animal/'+id, params, { headers })
+                .map(res => res);
+    }
 
 }

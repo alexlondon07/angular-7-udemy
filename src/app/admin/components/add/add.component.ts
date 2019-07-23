@@ -25,7 +25,7 @@ export class AddComponent implements OnInit {
     private _userServide: UserService,
     private _animalServide: AnimalService
   ) {
-    this.animal = new Animal('', '', '2019', '', '');
+    this.animal = new Animal('', '', '', '2019', '', '');
     this.identity = this._userServide.getIdentity();
     this.title = this.title;
     this.token = this._userServide.getToken();
